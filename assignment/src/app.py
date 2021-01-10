@@ -13,12 +13,14 @@ knowledgeModel = knowledge_model.KnowledgeModel()
 
 @app.route('/user/',methods=['GET'])
 def get_user_details():
+    # This is the method used to view the users
     username,password = request.headers['Username'],request.headers['Password']
     if username == 'admin' and password == 'admin': return {'response':dbModel.find(),'status':200}
     else: return {'response':"You don't have permissions to view users",'status':500}
 
 @app.route('/knowledge/',methods=['GET'])
 def get_knowledge_details():
+    # This is the method used to view the knowledge base
     username = request.headers['Username']
     obj = dbModel.find_by_record(username)
     if obj:
@@ -28,6 +30,7 @@ def get_knowledge_details():
 
 @app.route('/user/',methods=['POST'])
 def add_user():
+    # This is the method to create an user
     if request.method == 'POST':
         if request.json:
             username,password = request.headers['Username'],request.headers['Password']
@@ -44,6 +47,7 @@ def add_user():
 
 @app.route('/knowledge/',methods=['POST'])
 def add_knowledge():
+    # This is the method to create a knowledge
     if request.method == 'POST':
         if request.json:
             username = request.headers['Username']
@@ -66,12 +70,14 @@ def add_knowledge():
 
 @app.route('/user/<string:name>/', methods=['GET'])
 def get_user(name):
+    # This is the method to view a specific user
     username,password = request.headers['Username'],request.headers['Password']
     if username == 'admin' and password == 'admin': return {'response':dbModel.find_by_record(name),'status':200}
     else: return {'response':"You don't have permissions to know about users",'status':500}
 
 @app.route('/knowledge/<string:kname>/', methods=['GET'])
 def get_knowledge(kname):
+    # This is the method to view a specific knowledge
     username = request.headers['Username']
     obj = dbModel.find_by_record(username)
     if obj:
@@ -81,6 +87,7 @@ def get_knowledge(kname):
 
 @app.route('/user/<string:name>/',methods=['PUT'])
 def update_user(name):
+    # This is the method to update a user
     if request.method == 'PUT':
         username,password = request.headers['Username'],request.headers['Password']
         if username == 'admin' and password == 'admin':
@@ -91,6 +98,7 @@ def update_user(name):
 
 @app.route('/knowledge/<string:kname>/',methods=['PUT'])
 def update_knowledge(kname):
+    # This is the method to update a knowledge
     if request.method == 'PUT':
         username = request.headers['Username']
         obj = dbModel.find_by_record(username)
@@ -105,6 +113,7 @@ def update_knowledge(kname):
 
 @app.route('/user/<string:uname>/',methods=['DELETE'])
 def delete_user(uname):
+    # This is the method to delete a user
     if request.method == 'DELETE':
         username,password = request.headers['Username'],request.headers['Password']
         if username == 'admin' and password == 'admin':
@@ -114,6 +123,7 @@ def delete_user(uname):
 
 @app.route('/knowledge/<string:kname>/',methods=['DELETE'])
 def delete_knowledge(kname):
+    # This is the method to delete a knowledge
     if request.method == 'DELETE':
         username = request.headers['Username']
         obj = dbModel.find_by_record(username)
@@ -126,6 +136,7 @@ def delete_knowledge(kname):
 
 @app.route('/content/',methods=['POST'])
 def add_content():
+    # This is the method to add the content
     if request.method == 'POST':
         if request.json:
             username = request.headers['Username']
@@ -147,6 +158,7 @@ def add_content():
 
 @app.route('/content/',methods=['GET'])
 def get_content_details():
+    # This is the method to view all the content
     username = request.headers['Username']
     obj = dbModel.find_by_record(username)
     if obj:
@@ -157,6 +169,7 @@ def get_content_details():
 
 @app.route('/content_search/',methods=['POST'])
 def search_content():
+    # This is the method to search the content
     if request.method == 'POST':
         if request.json:
             username = request.headers['Username']
