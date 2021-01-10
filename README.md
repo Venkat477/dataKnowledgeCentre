@@ -1,4 +1,4 @@
-# dataKnowledgeCentre
+# Data Knowledge Centre
 
 This is the service which will be used to create users and add some content in to the knowledge centre, so that users can search the content.
 
